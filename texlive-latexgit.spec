@@ -1,6 +1,6 @@
 Name:		texlive-latexgit
 Version:	54811
-Release:	1
+Release:	2
 Summary:	A LaTeX git wrapper
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/latexgit
