@@ -1,41 +1,23 @@
-Name:		texlive-latexgit
-Version:	54811
-Release:	2
+%global tl_name latexgit
+%global tl_revision 54811
+
+Name:		texlive-%{tl_name}
+Version:	%{tl_revision}
+Release:	1
 Summary:	A LaTeX git wrapper
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/latexgit
 License:	gpl3
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.source.r%{version}.tar.xz
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/latexgit.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-This package provides several macros to fetch git information
-and typeset it. The macros defined by LaTeXgit can be helpful
-to documentation authors and others to whom clear document
-versioning is important.
+This package provides several macros to fetch git information and
+typeset it. The macros defined by LaTeXgit can be helpful to
+documentation authors and others to whom clear document versioning is
+important.
 
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-rm -rf tlpkg
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -a * %{buildroot}%{_texmfdistdir}
-
-%files
-%doc %{_texmfdistdir}/source/latex/latexgit
-%{_texmfdistdir}/tex/latex/latexgit
-%doc %{_texmfdistdir}/doc/latex/latexgit
-
-%post -p %{_sbindir}/texlive.post
-
-%postun
-[ "$1" -eq 0 ] && %{_sbindir}/texlive.post
